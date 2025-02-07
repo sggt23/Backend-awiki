@@ -1,23 +1,43 @@
 package com.awiki.models;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id",unique = true,nullable =false )
 	private Long idusuarios;
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String nombre_usuario;
+	@Column(nullable = false)
 	private String contraseña;
+	@Column(nullable = false)
 	private String imagen_perfil;
+	@Column(nullable = false)
 	private String descripcion_perfil;
+	@Column(nullable = false)
 	private Boolean es_perfil_empresa;
-	private static Long total= Long.valueOf(0);
+	//private static Long total= Long.valueOf(0);
 	
 	//Constructores
 	
 	//Constructor vacío
 	public Usuario() {
-		Usuario.total++;
-		this.idusuarios=Usuario.total;
+		//Usuario.total++;
+		//this.idusuarios=Usuario.total;
 	}
 
 	
@@ -26,8 +46,8 @@ public class Usuario {
 	public Usuario( String nombre, String email, String nombre_usuario, String contraseña,
 			String imagen_perfil, String descripcion_perfil, Boolean es_perfil_empresa) {
 		
-		Usuario.total++;
-		this.idusuarios=Usuario.total;
+		//Usuario.total++;
+		//this.idusuarios=Usuario.total;
 		this.nombre = nombre;
 		this.email = email;
 		this.nombre_usuario = nombre_usuario;
