@@ -1,23 +1,37 @@
 package com.awiki.models;
 
-public class Publicacion {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="publicaciones")
+public class Publicacion {
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
 	private Long id;
+	@Column(unique=true, nullable=false)
 	private String descripcion;
+	@Column(unique=true, nullable=false)
 	private String imagen;
-	private static Long total= Long.valueOf(0);
+	//private static Long total= Long.valueOf(0);
 	
 	//Constructor vacío
 	public Publicacion() {
-		Publicacion.total++;
-		this.id=Publicacion.total;
+		//Publicacion.total++;
+		//this.id=Publicacion.total;
 	}
 	//Constructor
 	public Publicacion(String descripcion, String imagen) {
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		Publicacion.total++;
-		this.id=Publicacion.total;
+		//Publicacion.total++;
+		//this.id=Publicacion.total;
 	}
 	
 	//Getteres y setters sin el Set Id

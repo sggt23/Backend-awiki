@@ -1,74 +1,66 @@
 package com.awiki.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awiki.models.Publicacion;
+import com.awiki.repository.PublicacionesRepository;
 @Service
 public class PublicacionesService {
 
-	private final List<Publicacion> publi= new ArrayList<Publicacion>();
+	public final PublicacionesRepository publicacionesRepository;
 	
 	@Autowired
-	public PublicacionesService() {
-		publi.add(new Publicacion("Disfrutando del atardecer en la playa.","ruta/imagen1.jpg"));
-		publi.add(new Publicacion("¡Nueva receta de pasta!", "ruta/imagen2.jpg"));
-		publi.add(new Publicacion("De excursión por las montañas.", "ruta/imagen3.jpg"));
-		publi.add(new Publicacion("Mi libro favorito del momento.", "ruta/imagen4.jpg"));
-		publi.add(new Publicacion("¡A cocinar se ha dicho!", "ruta/imagen5.jpg"));
+	public PublicacionesService(PublicacionesRepository publicacionesRepository) {
+		this.publicacionesRepository = publicacionesRepository;
 	}
 	
 	//getAllPublicaciones
 	public List <Publicacion> getAllPublicacions(){
-		return publi;
+		return publicacionesRepository.findAll();
 	}
 	
 	//getPublicacion
 	public Publicacion getPublicacion(Long id) {
-		Publicacion pub=null;
-		for(Publicacion publicacion: publi) {
-			if(publicacion.getId()== id) {
-				pub=publicacion;
-				break;
-			}
-		}
-		return pub;
+		return publicacionesRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("La publicación con el id ["
+						+ id + "] no existe"));
 	}
-	
 	
 	//deletePublicacion
 	public Publicacion deletePublicacion(Long id) {
 		Publicacion pub= null;
-		for(Publicacion publicacion : publi) {
-			if(publicacion.getId()== id) {
-				pub= publicacion;
-				publi.remove(publicacion);
-				break;
+			if(publicacionesRepository.existsById(id)) {
+				pub= publicacionesRepository.findById(id).get();
+				publicacionesRepository.deleteById(id);
 			}
-		}
-		return pub;
-	}
-	
+			return pub;
+	}	
 	
 	//addPublicacion
 	public Publicacion addPublicacion(Publicacion publicacion) {
-		publi.add(publicacion);
-		return publicacion;
+		Optional<Publicacion> pub= publicacionesRepository.findByDescripcion(publicacion.getDescripcion()); // repository
+		if(pub.isEmpty()) { 
+			publicacionesRepository.save(publicacion);
+			return publicacion;
+		}else {
+			return null;
+		}
 	}
 	
 	
 	//updatePublicacion
 	public Publicacion updatePublicacion(Long id, String descripcion, String imagen) {
 		Publicacion pub= null;
-		for(Publicacion publicacion : publi) {
+		if(publicacionesRepository.existsById(id)) {
+			Publicacion publicacion= publicacionesRepository.findById(id).get();
 			if(publicacion.getId().equals(id)) {
 				if(descripcion!=null)publicacion.setDescripcion(descripcion);
 				if(imagen!=null)publicacion.setImagen(imagen);
-				pub= publicacion;
-				break;
+				publicacionesRepository.save(publicacion);
 			}//if
 		}
 		return pub;
