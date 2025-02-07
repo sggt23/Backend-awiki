@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.awiki.models.Resena;
-import com.awiki.service.ResenasService;
+import com.awiki.services.ResenasService;
 
 @RestController
 @RequestMapping(path="/api/resenas/") //http://localhost:8080/api/resenas/
