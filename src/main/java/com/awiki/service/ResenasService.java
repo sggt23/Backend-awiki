@@ -2,72 +2,66 @@ package com.awiki.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awiki.models.Resena;
+import com.awiki.repository.ResenasRepository;
 
 @Service
 public class ResenasService {
-	public final List<Resena> listRes = new ArrayList <>();
+	public final ResenasRepository resenasRepository;
 	
 	@Autowired
-	public ResenasService() {
-		listRes.add(new Resena("¡Excelente servicio y comida deliciosa!", 5));
-		listRes.add(new Resena("Muy buen ambiente y atención.", 4));
-		listRes.add(new Resena("La comida estaba un poco fría.", 3));
-		listRes.add(new Resena("No me gustó la decoración del lugar.", 2));
-		listRes.add(new Resena("¡Los postres son increíbles!", 5));
-	}//Constructor
-
+	public ResenasService(ResenasRepository resenasRepository) {
+		this.resenasRepository = resenasRepository;
+	}//constructor
 
 	public List<Resena> getAllResenas() {
-		return listRes;
+		return resenasRepository.findAll();
 	}//getAllResenas
 
 
 	public Resena getResena(long id) {
-		Resena res=null;
-		for(Resena resena: listRes) {
-			if(resena.getId()==id) {
-				res=resena;
-				break;
-			}
-		}
-		return res;
+		return resenasRepository.findById(id).orElseThrow(
+				() -> new IllegalArgumentException("La resena con el id["
+						+ id +"] no existe")
+				);
 	}//get1resena
 
 
 	public Resena deleteResena(long id) {
 		Resena res=null;
-		for(Resena resena: listRes) {
-			if(resena.getId()==id) {
-				res=resena;
-				listRes.remove(resena);
-				break;
-			}
-		}
+		if(resenasRepository.existsById(id)) {
+			res = resenasRepository.findById(id).get();
+			resenasRepository.deleteById(id);
+		}//if exist
 		return res;
 	}//DeleteResena
 
 
 	public Resena addResena(Resena resena) {
-		listRes.add(resena);
-		return resena;
+		Optional<Resena> res = resenasRepository.findByDescripcion(resena.getDescripcion());
+		if(res.isEmpty()) {
+			return resenasRepository.save(resena);
+		}else {
+			return null;
+		}//else
+		
 	}//addResena
 
 
 	public Resena updateResena(long id, String descripcion, Integer calificacion) {
 		Resena res = null;
-		for(Resena resena : listRes) {
-			if(resena.getId().equals(id)) {
+		if(resenasRepository.existsById(id)) {
+			Resena resena = resenasRepository.findById(id).get();
 				if(descripcion!=null) resena.setDescripcion(descripcion);
 				if(calificacion!=null) resena.setCalificacion(calificacion);
+				resenasRepository.save(resena);
 				res=resena;
-				break;
 			}//if
-	}
 		return res;
 	}//updateResena
 	
