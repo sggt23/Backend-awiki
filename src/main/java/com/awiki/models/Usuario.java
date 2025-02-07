@@ -30,7 +30,7 @@ public class Usuario {
 	private String descripcion_perfil;
 	@Column(nullable = false)
 	private Boolean es_perfil_empresa;
-	//private static Long total= Long.valueOf(0);
+	private static Long total= Long.valueOf(0);
 	
 	//Constructores
 	
