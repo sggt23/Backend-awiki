@@ -1,4 +1,4 @@
-package com.awiki.service;
+package com.awiki.services;
 
 import java.util.ArrayList;
 import java.util.List;
