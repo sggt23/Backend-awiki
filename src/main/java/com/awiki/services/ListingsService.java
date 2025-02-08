@@ -2,72 +2,62 @@ package com.awiki.services;
 
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.awiki.models.Listing;
+import com.awiki.repositories.ListingsRepository;
 
 @Service
 public class ListingsService {
-	public List<Listing> listings = new ArrayList<>();
+//	public List<Listing> listings = new ArrayList<Listing>();
 	
-	public ListingsService() {
-		super();
-		listings.add(new Listing("Restaurant Roma", "Comida italiana", "restaurante", "Congal 13", "Colonia Centro", "Ecatepec", "Estado Mexico", 12345));
-		listings.add(new Listing("Tienda Hernadez", "Ropa y accesorios", "tienda", "Chalala 201", "Colonia Sur", "Nezahualcoyotl", "Veracruz", 67890));
-		listings.add(new Listing("Hotel ABC", "Hospedaje", "hotel", "Calle 3 #30", "Real de Pellejo 34", "Tlanepantla", "Durango", 13579));
-		listings.add(new Listing("Cafetería el dicho", "Café y postres", "cafeteria", "Valladolid 8932", "Colonia Oeste", "Atizapan", "Jalisco", 24680));
-		listings.add(new Listing("Bar Bar", "Bebidas y snacks", "bar", "Calle 5 #50", "Ermozo 604", "Coacalco", "Guerrero", 98765));
+	public final ListingsRepository listRep;//ADD
+	
+	@Autowired
+	public ListingsService(ListingsRepository listRep) {
+		this.listRep = listRep;
+//		super();
+		
+//		listings.add(new Listing("Restaurant Roma", "Comida italiana", "restaurante", "Congal 13", "Colonia Centro", "Ecatepec", "Estado Mexico", 12345));
+//		listings.add(new Listing("Tienda Hernadez", "Ropa y accesorios", "tienda", "Chalala 201", "Colonia Sur", "Nezahualcoyotl", "Veracruz", 67890));
+//		listings.add(new Listing("Hotel ABC", "Hospedaje", "hotel", "Calle 3 #30", "Real de Pellejo 34", "Tlanepantla", "Durango", 13579));
+//		listings.add(new Listing("Cafetería el dicho", "Café y postres", "cafeteria", "Valladolid 8932", "Colonia Oeste", "Atizapan", "Jalisco", 24680));
+//		listings.add(new Listing("Bar Bar", "Bebidas y snacks", "bar", "Calle 5 #50", "Ermozo 604", "Coacalco", "Guerrero", 98765));
 	}//CONSTRUCTOR
 	
 	public List<Listing> getListings() {
-		return listings;
+		return listRep.findAll();
 	}//getListings()
 	
 	public Listing getListing(Long id) {
-		Listing res = null;
-		for (Listing lstng : listings) {
-			if (lstng.getId() == id) {
-				res = lstng;
-				return res;
-			}//if
-		}//for
-		return res;
+		return listRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Listing with ID" + id + "does not exist."));
 	}//getListing()
 	
-	public String addListing(Listing l) {
-		String listingName = l.getNombre();
-		for (Listing lstng : listings) {
-			if (lstng.getNombre() == listingName) {
-				return "FAILED: LISTING ALREADY EXISTS.";
-			}//if
-		}//for
-		listings.add(l);
-		return "SUCCESS!";
+	public void addListing(Listing lstng) {
+		Optional<Listing> listing = listRep.findByNombre(lstng.getNombre());
+		if (listing.isEmpty()) {
+			listRep.save(lstng);
+		}
 	}//addListing()
 	
-	public String updateListing(Long id, String nombre, String descripcion, String categoria, String direccion, String colonia, String municipio, String estado, Integer codigoPostal) {
-		for(Listing lstng : listings) {
-			if (lstng.getId() == id) {
-				if (nombre != null) lstng.setNombre(nombre);
-				if (descripcion !=null) lstng.setDescripcion(descripcion);
-				if (categoria !=null) lstng.setCategoria(categoria);
-				if (direccion !=null) lstng.setDireccion(direccion);
-				if (colonia !=null) lstng.setColonia(colonia);
-				if (municipio !=null) lstng.setMunicipio(municipio);
-				if (estado !=null) lstng.setEstado(estado);
-				if (codigoPostal !=null) lstng.setCodigoPostal(codigoPostal);
-				return "SUCCESS!";
+	public void updateListing(Long id, String nombre, String descripcion, String categoria, String direccion, String colonia, String municipio, String estado, Integer codigoPostal) {
+			Listing listing = null;
+			if (listRep.existsById(id)) {
+				if (nombre != null) listing.setNombre(nombre);
+				if (descripcion !=null) listing.setDescripcion(descripcion);
+				if (categoria !=null) listing.setCategoria(categoria);
+				if (direccion !=null) listing.setDireccion(direccion);
+				if (colonia !=null) listing.setColonia(colonia);
+				if (municipio !=null) listing.setMunicipio(municipio);
+				if (estado !=null) listing.setEstado(estado);
+				if (codigoPostal !=null) listing.setCodigoPostal(codigoPostal);
+				listRep.save(listing);
 			}//if
-		}//for
-		return "FAILED: LISTING DOES NOT EXIST.";
 	}//updateListing()
 	
-	public String deleteListing(Long id) {
-		for(Listing lstng : listings) {
-			if (lstng.getId() == id) {
-				listings.remove(lstng);
-				return "SUCCESS!";
-			}
-		}
-		return "FAILED: LISTING DOES NOT EXIST.";
+	public void deleteListing(Long id) {
+		if(listRep.existsById(id)) {
+			listRep.deleteById(id);
+		}//if
 	}
 }//CLASS

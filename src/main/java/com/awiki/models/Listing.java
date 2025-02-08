@@ -1,27 +1,42 @@
 package com.awiki.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="listings")
 public class Listing {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
 	private Long id;
+	@Column(nullable=false)
 	private String nombre;
 	private String descripcion;
+	@Column(nullable=false)
 	private Double rating;
 	private String categoria;
+	@Column(nullable=false)
 	private String direccion;
+	@Column(nullable=false)
 	private String colonia;
+	@Column(nullable=false)
 	private String municipio;
+	@Column(nullable=false)
 	private String estado;
+	@Column(nullable=false)
 	private Integer codigoPostal;
-	private static Long idIncrement = 1L;
 	
 	public Listing() {
-		super();
-		this.id = idIncrement;
-		idIncrement++;
+		this.id = id;
 	}
 	
 	public Listing(String nombre, String descripcion, String categoria, String direccion, String colonia, String municipio, String estado, Integer codigoPostal) {
 		super();
-		this.id = idIncrement;
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.rating = 5.0;
@@ -31,7 +46,6 @@ public class Listing {
 		this.municipio = municipio;
 		this.estado = estado;
 		this.codigoPostal = codigoPostal;
-		idIncrement++;
 	}
 
 	public Long getId() {

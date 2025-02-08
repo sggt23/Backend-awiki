@@ -1,4 +1,4 @@
-package com.awiki.service;
+package com.awiki.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.awiki.models.Resena;
 
 @Service
 public class ResenasService {
-	public final List<Resena> listRes = new ArrayList <>();
+	public final List<Resena> listRes = new ArrayList <Resena>();
 	
 	@Autowired
 	public ResenasService() {

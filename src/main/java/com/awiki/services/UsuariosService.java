@@ -10,7 +10,7 @@ import com.awiki.models.Usuario;
 @Service
 public class UsuariosService {
 
-    private final List<Usuario> listaUsuarios = new ArrayList<>();
+    private final List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 
     public UsuariosService() {
         listaUsuarios.add(new Usuario("Juan Pérez", "juan.perez@example.com", "juanperez", "password123", "ruta/imagen1.jpg", "Soy Juan", false));
