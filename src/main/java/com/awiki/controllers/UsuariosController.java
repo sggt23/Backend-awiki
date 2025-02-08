@@ -49,21 +49,18 @@ public class UsuariosController {
 	public Usuario adUsuario(@RequestBody Usuario usuario) {
 		return usuariosService.addUsuario(usuario);
 	}
-	 @PutMapping(path = "{usuId}")
-	    public Usuario updateUsuario(@PathVariable("usuId") Long idusuarios,
-	                                 @RequestParam(name="nombre", required=false) String nombre,
-	                                 @RequestParam(name="email", required=false) String email,
-	                                 @RequestParam(name="nombre_usuario", required=false) String nombre_usuario,
-	                                 @RequestParam(name="contraseña", required=false) String contraseña,
-	                                 @RequestParam(name="imagen_perfil", required=false) String imagen_perfil,
-	                                 @RequestParam(name="descripcion_perfil", required=false) String descripcion_perfil,
-	                                 @RequestParam(name="es_perfil_empresa", required=false) Boolean es_perfil_empresa) {
-	        return usuariosService.updateUsuario(idusuarios, nombre, email, nombre_usuario, contraseña, imagen_perfil, descripcion_perfil, es_perfil_empresa);
+	 
+	@PutMapping(path = "{usuId}")
+    public Usuario updateUsuario(@PathVariable("usuId") Long idusuarios,
+                                 @RequestParam(name="nombre", required=false) String nombre,
+                                 @RequestParam(name="email", required=false) String email,
+                                 @RequestParam(name="nombre_usuario", required=false) String nombre_usuario,
+                                 @RequestParam(name="contraseña", required=false) String contraseña,
+                                 @RequestParam(name="imagen_perfil", required=false) String imagen_perfil,
+                                 @RequestParam(name="descripcion_perfil", required=false) String descripcion_perfil,
+                                 @RequestParam(name="es_perfil_empresa", required=false) Boolean es_perfil_empresa) {
+       return usuariosService.updateUsuario(idusuarios, nombre, email, nombre_usuario, contraseña, imagen_perfil, descripcion_perfil, es_perfil_empresa);
 
 }
 
 }
-
-
-
-
