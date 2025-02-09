@@ -30,7 +30,7 @@ public class ListingsService {
 	}//getListings()
 	
 	public Listing getListing(Long id) {
-		return listRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Listing with ID" + id + "does not exist."));
+		return listRep.findById(id).orElseThrow(() -> new IllegalArgumentException("Listing with ID " + id + " does not exist."));
 	}//getListing()
 	
 	public void addListing(Listing lstng) {
@@ -40,17 +40,30 @@ public class ListingsService {
 		}
 	}//addListing()
 	
-	public void updateListing(Long id, String nombre, String descripcion, String categoria, String direccion, String colonia, String municipio, String estado, Integer codigoPostal) {
+	public void updateListing(Long id, String nombre, String nombreCalle, String numeroCalle, String colonia, String municipio,
+			String estado, String codigoPostal, String descripcion, String telefonoContacto, String emailContacto,
+			String sitioWeb, String tipoNegocio, String tipoCocina, Integer categoriaHotel,
+			String horarios, String horarioCheckInOut) {
 			Listing listing = null;
 			if (listRep.existsById(id)) {
+				listing = listRep.findById(id).get();
 				if (nombre != null) listing.setNombre(nombre);
-				if (descripcion !=null) listing.setDescripcion(descripcion);
-				if (categoria !=null) listing.setCategoria(categoria);
-				if (direccion !=null) listing.setDireccion(direccion);
+				if (nombreCalle !=null) listing.setNombreCalle(nombreCalle);
+				if (numeroCalle !=null) listing.setNumeroCalle(numeroCalle);
 				if (colonia !=null) listing.setColonia(colonia);
 				if (municipio !=null) listing.setMunicipio(municipio);
 				if (estado !=null) listing.setEstado(estado);
 				if (codigoPostal !=null) listing.setCodigoPostal(codigoPostal);
+				if (descripcion !=null) listing.setDescripcion(descripcion);
+				if (telefonoContacto !=null) listing.setTelefonoContacto(telefonoContacto);
+				if (emailContacto !=null) listing.setEmailContacto(emailContacto);
+				if (sitioWeb !=null) listing.setSitioWeb(sitioWeb);
+				if (tipoNegocio !=null) listing.setTipoNegocio(tipoNegocio);
+				if (tipoCocina !=null) listing.setTipoCocina(tipoCocina);
+				if (categoriaHotel !=null) listing.setCategoriaHotel(categoriaHotel);
+				if (descripcion !=null) listing.setDescripcion(descripcion);
+				if (horarios !=null) listing.setHorarios(horarios);
+				if (horarioCheckInOut !=null) listing.setHorarioCheckInOut(horarioCheckInOut);
 				listRep.save(listing);
 			}//if
 	}//updateListing()

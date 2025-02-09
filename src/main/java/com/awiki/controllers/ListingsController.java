@@ -38,15 +38,23 @@ public class ListingsController {
 	public void updateListing(
 		@PathVariable("listing") Long id,
 		@RequestParam(name="nombre", required=false) String nombre,
-		@RequestParam(name="descripcion", required=false) String descripcion,
-		@RequestParam(name="categoria", required=false) String categoria,
-		@RequestParam(name="direccion", required=false) String direccion,
+		@RequestParam(name="nombreCalle", required=false) String nombreCalle,
+		@RequestParam(name="numeroCalle", required=false) String numeroCalle,
 		@RequestParam(name="colonia", required=false) String colonia,
 		@RequestParam(name="municipio", required=false) String municipio,
 		@RequestParam(name="estado", required=false) String estado,
-		@RequestParam(name="codigoPostal", required=false) Integer codigoPostal
+		@RequestParam(name="codigoPostal", required=false) String codigoPostal,
+		@RequestParam(name="descripcion", required=false) String descripcion,
+		@RequestParam(name="telefonoContacto", required=false) String telefonoContacto,
+		@RequestParam(name="emailContacto", required=false) String emailContacto,
+		@RequestParam(name="sitioWeb", required=false) String sitioWeb,
+		@RequestParam(name="tipoNegocio", required=false) String tipoNegocio,
+		@RequestParam(name="tipoCocina", required=false) String tipoCocina,
+		@RequestParam(name="categoriaHotel", required=false) Integer categoriaHotel,
+		@RequestParam(name="horarios", required=false) String horarios,
+		@RequestParam(name="horarioCheckInOut", required=false) String horarioCheckInOut
 		) {
-			ls.updateListing(id, nombre, descripcion, categoria, direccion, colonia, municipio, estado, codigoPostal);
+			ls.updateListing(id, nombre, nombreCalle, numeroCalle, colonia, municipio, estado, codigoPostal, descripcion, telefonoContacto, emailContacto, sitioWeb, tipoNegocio, tipoCocina, categoriaHotel, horarios, horarioCheckInOut);
 		}
 	
 	@DeleteMapping(path="{listingId}")
