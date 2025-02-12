@@ -7,5 +7,5 @@ import com.awiki.models.Listing;
 
 	@Repository
 	public interface ListingsRepository extends JpaRepository<Listing, Long>{
-		Optional<Listing> findByNombre(String name);
+		Optional<Listing> findByNombre(String nombre);
 	}

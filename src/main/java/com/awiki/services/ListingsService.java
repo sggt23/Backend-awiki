@@ -16,13 +16,6 @@ public class ListingsService {
 	@Autowired
 	public ListingsService(ListingsRepository listRep) {
 		this.listRep = listRep;
-//		super();
-		
-//		listings.add(new Listing("Restaurant Roma", "Comida italiana", "restaurante", "Congal 13", "Colonia Centro", "Ecatepec", "Estado Mexico", 12345));
-//		listings.add(new Listing("Tienda Hernadez", "Ropa y accesorios", "tienda", "Chalala 201", "Colonia Sur", "Nezahualcoyotl", "Veracruz", 67890));
-//		listings.add(new Listing("Hotel ABC", "Hospedaje", "hotel", "Calle 3 #30", "Real de Pellejo 34", "Tlanepantla", "Durango", 13579));
-//		listings.add(new Listing("Cafetería el dicho", "Café y postres", "cafeteria", "Valladolid 8932", "Colonia Oeste", "Atizapan", "Jalisco", 24680));
-//		listings.add(new Listing("Bar Bar", "Bebidas y snacks", "bar", "Calle 5 #50", "Ermozo 604", "Coacalco", "Guerrero", 98765));
 	}//CONSTRUCTOR
 	
 	public List<Listing> getListings() {
@@ -42,7 +35,7 @@ public class ListingsService {
 	
 	public void updateListing(Long id, String nombre, String nombreCalle, String numeroCalle, String colonia, String municipio,
 			String estado, String codigoPostal, String descripcion, String telefonoContacto, String emailContacto,
-			String sitioWeb, String tipoNegocio, String tipoCocina, Integer categoriaHotel,
+			String sitioWeb, String tipoNegocio, String tipoCocina, String tipoProductos, Integer categoriaHotel,
 			String horarios, String horarioCheckInOut) {
 			Listing listing = null;
 			if (listRep.existsById(id)) {
@@ -60,6 +53,7 @@ public class ListingsService {
 				if (sitioWeb !=null) listing.setSitioWeb(sitioWeb);
 				if (tipoNegocio !=null) listing.setTipoNegocio(tipoNegocio);
 				if (tipoCocina !=null) listing.setTipoCocina(tipoCocina);
+				if (tipoProductos !=null) listing.setTipoProductos(tipoProductos);
 				if (categoriaHotel !=null) listing.setCategoriaHotel(categoriaHotel);
 				if (descripcion !=null) listing.setDescripcion(descripcion);
 				if (horarios !=null) listing.setHorarios(horarios);

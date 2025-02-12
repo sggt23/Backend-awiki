@@ -17,20 +17,11 @@ public class UsuariosService {
    
   private final UsuariosRepository usuariosRepository;
     
-    
    @Autowired 
    public UsuariosService(UsuariosRepository usuariosRepository) {
 		super();
 		this.usuariosRepository = usuariosRepository;
 	} //constructor
-
-// public UsuariosService() {
-      //  listaUsuarios.add(new Usuario("Juan Pérez", "juan.perez@example.com", "juanperez", "password123", "ruta/imagen1.jpg", "Soy Juan", false));
-        //listaUsuarios.add(new Usuario("María García", "maria.garcia@example.com", "mariagarcia", "secreto456", "ruta/imagen2.jpg", "Comerciante", true));
-        //listaUsuarios.add(new Usuario("Carlos López", "carlos.lopez@example.com", "carloslopez", "clave789", "ruta/imagen3.jpg", "Emprendedor", false));
-        //listaUsuarios.add(new Usuario("Ana Rodríguez", "ana.rodriguez@example.com", "anarodriguez", "contraseña10", "ruta/imagen4.jpg", "Amante de la naturaleza", false));
-        //listaUsuarios.add(new Usuario("Pedro Martínez", "pedro.martinez@example.com", "pedromartinez", "miclave11", "ruta/imagen5.jpg", "Restaurantero", true));
-  //  }
 
     // getAllUsuarios
     public List<Usuario> getAllUsuarios() {
@@ -62,7 +53,7 @@ public class UsuariosService {
   	  
  	   Optional<Usuario> user=usuariosRepository.findByEmail(usuario.getEmail());
  	   if(user.isEmpty()) {
- 		   usuario.setContraseña(usuario.getContraseña());
+ 		   usuario.setContrasena(usuario.getContrasena());
  		   return usuariosRepository.save(usuario);
  	   }else {
  		   return null;
@@ -73,22 +64,21 @@ public class UsuariosService {
 
     // updateUsuario
     
-    public Usuario updateUsuario(long idusuarios, String nombre, String email, String nombre_usuario, String contraseña, String imagen_perfil, String descripcion_perfil, Boolean es_perfil_empresa) {
+    public Usuario updateUsuario(
+    		Long id, String nombre, String apellido, String email,
+    		String contrasena, String imagenPerfil, String descripcionPerfil,
+    		Boolean esPerfilEmpresa) {
         Usuario usuarioActualizado = null;
-
-
-        if (usuariosRepository.existsById(idusuarios)) { // Obtener el usuario por su ID
-           
-            Usuario usuario = usuariosRepository.findById(idusuarios).get();
-
+        if (usuariosRepository.existsById(id)) { // Obtener el usuario por su ID
+            Usuario usuario = usuariosRepository.findById(id).get();
             // Actualizar los campos si no son nulos
             if (nombre != null) usuario.setNombre(nombre);
+            if (apellido != null) usuario.setApellido(apellido);
             if (email != null) usuario.setEmail(email);
-            if (nombre_usuario != null) usuario.setNombre_usuario(nombre_usuario);
-            if (contraseña != null) usuario.setContraseña(contraseña);
-            if (imagen_perfil != null) usuario.setImagen_perfil(imagen_perfil);
-            if (descripcion_perfil != null) usuario.setDescripcion_perfil(descripcion_perfil);
-            if (es_perfil_empresa != null) usuario.setEs_perfil_empresa(es_perfil_empresa);
+            if (contrasena != null) usuario.setContrasena(contrasena);
+            if (imagenPerfil != null) usuario.setImagenPerfil(imagenPerfil);
+            if (descripcionPerfil != null) usuario.setDescripcionPerfil(descripcionPerfil);
+            if (esPerfilEmpresa != null) usuario.setEsPerfilEmpresa(esPerfilEmpresa);
 
             
             usuariosRepository.save(usuario);

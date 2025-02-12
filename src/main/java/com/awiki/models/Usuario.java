@@ -1,12 +1,10 @@
 package com.awiki.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="usuarios")
@@ -14,27 +12,32 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id",unique = true,nullable =false )
-	private Long idusuarios; //Cambiar a solo "id", es clave primaria.
+	@Column(name="id",unique = true,nullable =false)
+	private Long id;
 	@Column(nullable = false)
 	private String nombre;
-	// Agregar campo "apellido"; no debe ser nulo.
+	@Column(nullable = false)
+	private String apellido;
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
-	private String nombre_usuario; //Eliminar, no queda tiempo para implementar.
+	private String contrasena;
+	private String imagenPerfil;
 	@Column(nullable = false)
-	private String contraseña;// Cambiar nombre a "contrasena", sin Ñ.
-	//Quitar anotación de abajo, "imagenPerfil" SÍ puede ser nulo.
+	private String descripcionPerfil;
 	@Column(nullable = false)
-	private String imagen_perfil; //Cambiar a "imagenPerfil".
-	//Quitar anotación de abajo, "descripcionPerfil" SÍ puede ser nulo.
-	@Column(nullable = false)
-	private String descripcion_perfil; //Cambiar a "descripcionPerfil".
-	@Column(nullable = false)
-	private Boolean es_perfil_empresa; //Cambiar a "esPerfilEmpresa".
-	private static Long total= Long.valueOf(0);//Eliminar, ya no se usa.
-	
+	private Boolean esPerfilEmpresa;
+	/*--------------AGREGADO POR ADRIÁN--------------*/
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="categoryId", referencedColumnName="id")
+	private List<Listing> listingsUsuario = new ArrayList<Listing>();
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="categoryId", referencedColumnName="id")
+	private List<Publicacion> publicacionesUsuario = new ArrayList<Publicacion>();
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="categoryId", referencedColumnName="id")
+	private List<Resena> resenasUsuario = new ArrayList<Resena>();
+	/*-----------------------------------------------*/
 	//Constructores
 	
 	//Constructor vacío
@@ -46,21 +49,26 @@ public class Usuario {
 	
 	//Constructor
 	
-	public Usuario( String nombre, String email, String nombre_usuario, String contraseña,
-			String imagen_perfil, String descripcion_perfil, Boolean es_perfil_empresa) {
+	public Usuario( String nombre, String apellido, String email, String contrasena,
+			String imagenPerfil, String descripcionPerfil, Boolean esPerfilEmpresa) {
 		
 		//Usuario.total++;
 		//this.idusuarios=Usuario.total;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.email = email;
-		this.nombre_usuario = nombre_usuario;
-		this.contraseña = contraseña;
-		this.imagen_perfil = imagen_perfil;
-		this.descripcion_perfil = descripcion_perfil;
-		this.es_perfil_empresa = es_perfil_empresa;
+		this.contrasena = contrasena;
+		this.imagenPerfil = imagenPerfil;
+		this.descripcionPerfil = descripcionPerfil;
+		this.esPerfilEmpresa = esPerfilEmpresa;
 	}
 
 	//Getters and Setters 
+	
+	public Long getId() {
+		return id;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -68,6 +76,14 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 
@@ -81,71 +97,69 @@ public class Usuario {
 	}
 
 
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	public String getContrasena() {
+		return contrasena;
 	}
 
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getImagenPerfil() {
+		return imagenPerfil;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setImagenPerfil(String imagenPerfil) {
+		this.imagenPerfil = imagenPerfil;
 	}
 
 
-	public String getImagen_perfil() {
-		return imagen_perfil;
+	public String getDescripcionPerfil() {
+		return descripcionPerfil;
 	}
 
 
-	public void setImagen_perfil(String imagen_perfil) {
-		this.imagen_perfil = imagen_perfil;
+	public void setDescripcionPerfil(String descripcionPerfil) {
+		this.descripcionPerfil = descripcionPerfil;
 	}
 
 
-	public String getDescripcion_perfil() {
-		return descripcion_perfil;
+	public Boolean getEsPerfilEmpresa() {
+		return esPerfilEmpresa;
 	}
 
 
-	public void setDescripcion_perfil(String descripcion_perfil) {
-		this.descripcion_perfil = descripcion_perfil;
+	public void setEsPerfilEmpresa(Boolean esPerfilEmpresa) {
+		this.esPerfilEmpresa = esPerfilEmpresa;
 	}
-
-
-	public Boolean getEs_perfil_empresa() {
-		return es_perfil_empresa;
-	}
-
-
-	public void setEs_perfil_empresa(Boolean es_perfil_empresa) {
-		this.es_perfil_empresa = es_perfil_empresa;
-	}
-
-
-	public Long getIdusuarios() {
-		return idusuarios;
-	}
-
-
 	
-	//ToString
+	public List<Listing> getListingsUsuario(){
+		return listingsUsuario;
+	}
 	
-	
+	public List<Publicacion> getPublicacionesUsuario(){
+		return publicacionesUsuario;
+	}
+
+	public List<Resena> getResenasUsuario(){
+		return resenasUsuario;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Usuario [idusuarios=" + idusuarios + ", nombre=" + nombre + ", email=" + email + ", nombre_usuario="
-				+ nombre_usuario + ", contraseña=" + contraseña + ", imagen_perfil=" + imagen_perfil
-				+ ", descripcion_perfil=" + descripcion_perfil + ", es_perfil_empresa=" + es_perfil_empresa + "]";
+		return "Usuario [idusuarios=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
+				+ email + ", contrasena=" + contrasena + ", imagenPerfil=" + imagenPerfil + ", descripcionPerfil="
+				+ descripcionPerfil + ", esPerfilEmpresa=" + esPerfilEmpresa + "]";
 	}
+
+
+
+	
+	
 	
 
 	

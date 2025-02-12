@@ -1,6 +1,5 @@
 package com.awiki.models;
 
-import java.util.HashMap;
 
 import javax.persistence.*;
 @Entity
@@ -12,6 +11,8 @@ public class Listing {
 	private Long id;
 	@Column(nullable=false)
 	private String nombre;
+	@Column(nullable=false)
+	private String imagen;
 	@Column(nullable=false)
 	private String nombreCalle;
 	@Column (nullable=false)
@@ -34,25 +35,29 @@ public class Listing {
 	private String tipoNegocio;
 	
 	private String tipoCocina;
+	private String tipoProductos;
 	private Integer categoriaHotel;
 	private String horarios;
 	private String horarioCheckInOut;
 	
 	@Column(nullable=false)
 	private Double rating;
+	@Column(nullable=false)
+	private Long usuariosId;
 	
 	public Listing() {
 		this.id = id;
 		this.rating = 5.0;
 	}
 
-	public Listing(String nombre, String nombreCalle, String numeroCalle, String colonia, String municipio,
+	public Listing(String nombre, String imagen, String nombreCalle, String numeroCalle, String colonia, String municipio,
 			String estado, String codigoPostal, String descripcion, String telefonoContacto, String emailContacto,
-			String sitioWeb, String tipoNegocio, String tipoCocina, Integer categoriaHotel,
-			String horarios, String horarioCheckInOut) {
+			String sitioWeb, String tipoNegocio, String tipoCocina, String tipoProductos, Integer categoriaHotel,
+			String horarios, String horarioCheckInOut, Long usuariosId) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		this.imagen = imagen;
 		this.nombreCalle = nombreCalle;
 		this.numeroCalle = numeroCalle;
 		this.colonia = colonia;
@@ -65,10 +70,12 @@ public class Listing {
 		this.sitioWeb = sitioWeb;
 		this.tipoNegocio = tipoNegocio;
 		this.tipoCocina = tipoCocina;
+		this.tipoProductos = tipoProductos;
 		this.categoriaHotel = categoriaHotel;
 		this.horarios = horarios;
 		this.horarioCheckInOut = horarioCheckInOut;
 		this.rating = 5.0;
+		this.usuariosId = usuariosId;
 	}
 
 	public Long getId() {
@@ -77,6 +84,10 @@ public class Listing {
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public String getImagen() {
+		return imagen;
 	}
 
 	public String getNombreCalle() {
@@ -126,6 +137,10 @@ public class Listing {
 	public String getTipoCocina() {
 		return tipoCocina;
 	}
+	
+	public String getTipoProductos() {
+		return tipoCocina;
+	}
 
 	public Integer getCategoriaHotel() {
 		return categoriaHotel;
@@ -145,6 +160,10 @@ public class Listing {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public void setNombreCalle(String nombreCalle) {
@@ -193,6 +212,10 @@ public class Listing {
 
 	public void setTipoCocina(String tipoCocina) {
 		this.tipoCocina = tipoCocina;
+	}
+	
+	public void setTipoProductos(String tipoProductos) {
+		this.tipoProductos = tipoProductos;
 	}
 
 	public void setCategoriaHotel(Integer categoriaHotel) {

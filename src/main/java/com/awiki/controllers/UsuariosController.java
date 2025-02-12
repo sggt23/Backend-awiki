@@ -31,36 +31,32 @@ public class UsuariosController {
     @GetMapping
     public List <Usuario> getUsuarios(){
     	return usuariosService.getAllUsuarios();
-    	
  	
     }
     
-    
-    @GetMapping(path = "{usuId}")
-    public Usuario getUsuario(@PathVariable("usuId")Long id) {
+    @GetMapping(path = "{id}")
+    public Usuario getUsuario(@PathVariable("id") Long id) {
     	return usuariosService.getUsuario(id);
     }
     
-    @DeleteMapping(path="{usuId}")
-	public Usuario deletUsuario(@PathVariable("usuId") Long id) {
-		return usuariosService.deleteUsuario(id);
-	}
-	@PostMapping
-	public Usuario adUsuario(@RequestBody Usuario usuario) {
+    @PostMapping
+	public Usuario addUsuario(@RequestBody Usuario usuario) {
 		return usuariosService.addUsuario(usuario);
-	}
-	 
-	@PutMapping(path = "{usuId}")
-    public Usuario updateUsuario(@PathVariable("usuId") Long idusuarios,
-                                 @RequestParam(name="nombre", required=false) String nombre,
-                                 @RequestParam(name="email", required=false) String email,
-                                 @RequestParam(name="nombre_usuario", required=false) String nombre_usuario,
-                                 @RequestParam(name="contraseña", required=false) String contraseña,
-                                 @RequestParam(name="imagen_perfil", required=false) String imagen_perfil,
-                                 @RequestParam(name="descripcion_perfil", required=false) String descripcion_perfil,
-                                 @RequestParam(name="es_perfil_empresa", required=false) Boolean es_perfil_empresa) {
-       return usuariosService.updateUsuario(idusuarios, nombre, email, nombre_usuario, contraseña, imagen_perfil, descripcion_perfil, es_perfil_empresa);
+    }
+    
+    
+	
+	@PutMapping(path = "{id}")
+    public Usuario updateUsuario(@PathVariable("id") Long id,
+         @RequestParam(name="nombre", required=false) String nombre,
+         @RequestParam(name="apellido", required=false) String apellido,
+         @RequestParam(name="email", required=false) String email,
+         @RequestParam(name="contrasena", required=false) String contrasena,
+         @RequestParam(name="imagenPerfil", required=false) String imagenPerfil,
+         @RequestParam(name="descripcionPerfil", required=false) String descripcionPerfil,
+         @RequestParam(name="esPerfilEmpresa", required=false) Boolean esPerfilEmpresa) {
+       return usuariosService.updateUsuario(id, nombre, apellido, email, contrasena, imagenPerfil, descripcionPerfil, esPerfilEmpresa);
 
-}
+}	
 
 }

@@ -50,11 +50,12 @@ public class ListingsController {
 		@RequestParam(name="sitioWeb", required=false) String sitioWeb,
 		@RequestParam(name="tipoNegocio", required=false) String tipoNegocio,
 		@RequestParam(name="tipoCocina", required=false) String tipoCocina,
+		@RequestParam(name="tipoProductos", required=false) String tipoProductos,
 		@RequestParam(name="categoriaHotel", required=false) Integer categoriaHotel,
 		@RequestParam(name="horarios", required=false) String horarios,
 		@RequestParam(name="horarioCheckInOut", required=false) String horarioCheckInOut
 		) {
-			ls.updateListing(id, nombre, nombreCalle, numeroCalle, colonia, municipio, estado, codigoPostal, descripcion, telefonoContacto, emailContacto, sitioWeb, tipoNegocio, tipoCocina, categoriaHotel, horarios, horarioCheckInOut);
+			ls.updateListing(id, nombre, nombreCalle, numeroCalle, colonia, municipio, estado, codigoPostal, descripcion, telefonoContacto, emailContacto, sitioWeb, tipoNegocio, tipoCocina, tipoProductos, categoriaHotel, horarios, horarioCheckInOut);
 		}
 	
 	@DeleteMapping(path="{listingId}")
