@@ -1,7 +1,10 @@
 package com.awiki.models;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
+
+
 @Entity
 @Table(name="listings")
 public class Listing {
@@ -45,17 +48,17 @@ public class Listing {
 	@Column(nullable=false)
 	private Long usuariosId;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="listingsId", referencedColumnName="id")
+	private List<Resena> resenasListing = new ArrayList<Resena>();
+	
 	public Listing() {
-		this.id = id;
-		this.rating = 5.0;
 	}
 
 	public Listing(String nombre, String imagen, String nombreCalle, String numeroCalle, String colonia, String municipio,
 			String estado, String codigoPostal, String descripcion, String telefonoContacto, String emailContacto,
 			String sitioWeb, String tipoNegocio, String tipoCocina, String tipoProductos, Integer categoriaHotel,
 			String horarios, String horarioCheckInOut, Long usuariosId) {
-		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.imagen = imagen;
 		this.nombreCalle = nombreCalle;
@@ -139,7 +142,7 @@ public class Listing {
 	}
 	
 	public String getTipoProductos() {
-		return tipoCocina;
+		return tipoProductos;
 	}
 
 	public Integer getCategoriaHotel() {
@@ -156,6 +159,14 @@ public class Listing {
 
 	public Double getRating() {
 		return rating;
+	}
+	
+	public Long getUsuariosId() {
+		return usuariosId;
+	}
+	
+	public List<Resena> getResenasListing() {
+		return resenasListing;
 	}
 
 	public void setNombre(String nombre) {
@@ -233,6 +244,12 @@ public class Listing {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
+	
+	public void setUsuariosId(Long usuariosId) {
+		this.usuariosId = usuariosId;
+	}
+	
+	
 	
 	
 	

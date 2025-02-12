@@ -1,12 +1,5 @@
 package com.awiki.models;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="resenas")
@@ -23,39 +16,22 @@ public class Resena {
 	private Long usuariosId;
 	@Column(nullable=false)
 	private Long listingsId;
-	//Agregar claves foráneas "usuariosId" y "listingsId".
 	
-	
-	
-	//Constructor
-	public Resena(String descripcion, Integer calificacion) {
+	public Resena(String descripcion, Integer calificacion, Long usuariosId, Long listingsId) {
 		this.descripcion = descripcion;
 		this.calificacion = calificacion;
 		this.usuariosId = usuariosId;
 		this.listingsId = listingsId;
-		//Resena.total++;
-		//this.id=Resena.total;
-		
 	}//Constructor
 
 
 	public Resena() {
-		//Resena.total++;
-		//this.id=Resena.total;
+		
 	}//Constructor vacío
-
-	
-	//Getters and Setters
 
 	public Long getId() {
 		return id;
 	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 
 	public String getDescripcion() {
 		return descripcion;
@@ -80,22 +56,18 @@ public class Resena {
 	public Long getUsuariosId() {
 		return usuariosId;
 	}
-
-
-	public void setUsuariosId(Long usuariosId) {
-		this.usuariosId = usuariosId;
+	
+	public Long setUsuariosId() {
+		return usuariosId;
 	}
-
 
 	public Long getListingsId() {
 		return listingsId;
 	}
-
-
-	public void setListingsId(Long listingsId) {
-		this.listingsId = listingsId;
+	
+	public Long setListingsId() {
+		return listingsId;
 	}
-
 	
 	//toString
 

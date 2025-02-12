@@ -27,33 +27,24 @@ public class Usuario {
 	private String descripcionPerfil;
 	@Column(nullable = false)
 	private Boolean esPerfilEmpresa;
-	/*--------------AGREGADO POR ADRIÁN--------------*/
+
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="categoryId", referencedColumnName="id")
+	@JoinColumn(name="usuariosId", referencedColumnName="id")
 	private List<Listing> listingsUsuario = new ArrayList<Listing>();
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="categoryId", referencedColumnName="id")
+	@JoinColumn(name="usuariosId", referencedColumnName="id")
 	private List<Publicacion> publicacionesUsuario = new ArrayList<Publicacion>();
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="categoryId", referencedColumnName="id")
+	@JoinColumn(name="usuariosId", referencedColumnName="id")
 	private List<Resena> resenasUsuario = new ArrayList<Resena>();
-	/*-----------------------------------------------*/
-	//Constructores
-	
-	//Constructor vacío
-	public Usuario() {
-		//Usuario.total++;
-		//this.idusuarios=Usuario.total;
-	}
 
 	
-	//Constructor
-	
+	public Usuario() {
+		
+	}//Constructor vacío
+
 	public Usuario( String nombre, String apellido, String email, String contrasena,
 			String imagenPerfil, String descripcionPerfil, Boolean esPerfilEmpresa) {
-		
-		//Usuario.total++;
-		//this.idusuarios=Usuario.total;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
@@ -61,9 +52,7 @@ public class Usuario {
 		this.imagenPerfil = imagenPerfil;
 		this.descripcionPerfil = descripcionPerfil;
 		this.esPerfilEmpresa = esPerfilEmpresa;
-	}
-
-	//Getters and Setters 
+	}//Constructor
 	
 	public Long getId() {
 		return id;
@@ -72,7 +61,6 @@ public class Usuario {
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -86,51 +74,41 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getContrasena() {
 		return contrasena;
 	}
-
 
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
 
-
 	public String getImagenPerfil() {
 		return imagenPerfil;
 	}
-
 
 	public void setImagenPerfil(String imagenPerfil) {
 		this.imagenPerfil = imagenPerfil;
 	}
 
-
 	public String getDescripcionPerfil() {
 		return descripcionPerfil;
 	}
-
 
 	public void setDescripcionPerfil(String descripcionPerfil) {
 		this.descripcionPerfil = descripcionPerfil;
 	}
 
-
 	public Boolean getEsPerfilEmpresa() {
 		return esPerfilEmpresa;
 	}
-
 
 	public void setEsPerfilEmpresa(Boolean esPerfilEmpresa) {
 		this.esPerfilEmpresa = esPerfilEmpresa;
@@ -148,27 +126,10 @@ public class Usuario {
 		return resenasUsuario;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Usuario [idusuarios=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
 				+ email + ", contrasena=" + contrasena + ", imagenPerfil=" + imagenPerfil + ", descripcionPerfil="
 				+ descripcionPerfil + ", esPerfilEmpresa=" + esPerfilEmpresa + "]";
 	}
-
-
-
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

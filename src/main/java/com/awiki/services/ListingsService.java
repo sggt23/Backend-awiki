@@ -9,9 +9,8 @@ import com.awiki.repositories.ListingsRepository;
 
 @Service
 public class ListingsService {
-//	public List<Listing> listings = new ArrayList<Listing>();
 	
-	public final ListingsRepository listRep;//ADD
+	public final ListingsRepository listRep;
 	
 	@Autowired
 	public ListingsService(ListingsRepository listRep) {

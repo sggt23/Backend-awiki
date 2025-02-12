@@ -1,11 +1,5 @@
 package com.awiki.models;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="publicaciones")
@@ -17,41 +11,48 @@ public class Publicacion {
 	private Long id;
 	@Column(unique=true, nullable=false)
 	private String descripcion;
-	//Quitar anotación abajo, "imagen" SÍ puede ser nulo.
-	@Column(unique=true, nullable=false)
 	private String imagen;
-	//Agregar clave foránea "UsuariosId".
-	//private static Long total= Long.valueOf(0);//Eliminar, ya no se usa.
+	@Column(nullable=false)
+	private Long usuariosId;
 	
 	//Constructor vacío
 	public Publicacion() {
-		//Publicacion.total++;
-		//this.id=Publicacion.total;
 	}
 	//Constructor
-	public Publicacion(String descripcion, String imagen) {
+	public Publicacion(String descripcion, String imagen, Long usuariosId) {
 		this.descripcion = descripcion;
 		this.imagen = imagen;
-		//Publicacion.total++;
-		//this.id=Publicacion.total;
+		this.usuariosId = usuariosId;
 	}
 	
-	//Getteres y setters sin el Set Id
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public String getImagen() {
-		return imagen;
-	}
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
 	public Long getId() {
 		return id;
 	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+	
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
+	public Long getUsuariosId() {
+		return usuariosId;
+	}
+	
+	public void setUsuariosId(Long usuariosId) {
+		this.usuariosId = usuariosId;
+	}
+	
 	@Override
 	public String toString() {
 		return "Publicacion [id=" + id + ", descripcion=" + descripcion + ", imagen=" + imagen + "]";
