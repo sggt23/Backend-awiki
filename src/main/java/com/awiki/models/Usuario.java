@@ -15,22 +15,25 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id",unique = true,nullable =false )
-	private Long idusuarios;
+	private Long idusuarios; //Cambiar a solo "id", es clave primaria.
 	@Column(nullable = false)
 	private String nombre;
+	// Agregar campo "apellido"; no debe ser nulo.
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
-	private String nombre_usuario;
+	private String nombre_usuario; //Eliminar, no queda tiempo para implementar.
 	@Column(nullable = false)
-	private String contraseña;
+	private String contraseña;// Cambiar nombre a "contrasena", sin Ñ.
+	//Quitar anotación de abajo, "imagenPerfil" SÍ puede ser nulo.
 	@Column(nullable = false)
-	private String imagen_perfil;
+	private String imagen_perfil; //Cambiar a "imagenPerfil".
+	//Quitar anotación de abajo, "descripcionPerfil" SÍ puede ser nulo.
 	@Column(nullable = false)
-	private String descripcion_perfil;
+	private String descripcion_perfil; //Cambiar a "descripcionPerfil".
 	@Column(nullable = false)
-	private Boolean es_perfil_empresa;
-	private static Long total= Long.valueOf(0);
+	private Boolean es_perfil_empresa; //Cambiar a "esPerfilEmpresa".
+	private static Long total= Long.valueOf(0);//Eliminar, ya no se usa.
 	
 	//Constructores
 	

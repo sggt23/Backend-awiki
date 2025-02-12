@@ -12,14 +12,16 @@ import javax.persistence.Table;
 public class Publicacion {
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
 	private Long id;
 	@Column(unique=true, nullable=false)
 	private String descripcion;
+	//Quitar anotación abajo, "imagen" SÍ puede ser nulo.
 	@Column(unique=true, nullable=false)
 	private String imagen;
-	//private static Long total= Long.valueOf(0);
+	//Agregar clave foránea "UsuariosId".
+	//private static Long total= Long.valueOf(0);//Eliminar, ya no se usa.
 	
 	//Constructor vacío
 	public Publicacion() {

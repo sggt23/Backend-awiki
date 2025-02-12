@@ -30,7 +30,7 @@ public class ListingsController {
 	}//getListing()
 	
 	@PostMapping
-	public void addProduct(@RequestBody Listing listing) {
+	public void addListing(@RequestBody Listing listing) {
 		ls.addListing(listing);
 	}//addListing()
 	

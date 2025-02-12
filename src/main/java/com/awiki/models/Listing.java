@@ -32,6 +32,7 @@ public class Listing {
 	private String sitioWeb;
 	@Column(nullable=false)
 	private String tipoNegocio;
+	
 	private String tipoCocina;
 	private Integer categoriaHotel;
 	private String horarios;

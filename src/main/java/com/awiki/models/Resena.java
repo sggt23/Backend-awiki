@@ -1,5 +1,4 @@
 package com.awiki.models;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +17,8 @@ public class Resena {
 	private String descripcion;
 	@Column(nullable = false)
 	private Integer calificacion;
+	//Agregar claves foráneas "usuariosId" y "listingsId".
+	
 	
 	
 	//Constructor
