@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awiki.models.Usuario;
-import com.awiki.repository.UsuariosRepository;
+import com.awiki.repositories.UsuariosRepository;
 
 @Service
 public class UsuariosService {

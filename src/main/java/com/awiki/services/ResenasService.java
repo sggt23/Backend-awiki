@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awiki.models.Resena;
-import com.awiki.repository.ResenasRepository;
+import com.awiki.repositories.ResenasRepository;
 
 @Service
 public class ResenasService {

@@ -1,4 +1,4 @@
-package com.awiki.repository;
+package com.awiki.repositories;
 
 import java.util.Optional;
 

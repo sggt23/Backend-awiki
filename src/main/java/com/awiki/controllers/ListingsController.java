@@ -4,9 +4,11 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import com.awiki.models.Listing;
 import com.awiki.services.ListingsService;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping(path="/api/listings/")
 public class ListingsController {
@@ -22,17 +24,17 @@ public class ListingsController {
 	@GetMapping
 	public List<Listing> getListings(){
 		return ls.getListings();
-	}//getListings()
+	}//GET controller (all)
 	
 	@GetMapping(path="{listingId}")
 	public Listing getListing(@PathVariable("listingId") Long id) {
 		return ls.getListing(id);
-	}//getListing()
+	}//GET controller (one)
 	
 	@PostMapping
 	public void addListing(@RequestBody Listing listing) {
 		ls.addListing(listing);
-	}//addListing()
+	}//POST controller
 	
 	@PutMapping(path="{listing}")
 	public void updateListing(
@@ -56,10 +58,10 @@ public class ListingsController {
 		@RequestParam(name="horarioCheckInOut", required=false) String horarioCheckInOut
 		) {
 			ls.updateListing(id, nombre, nombreCalle, numeroCalle, colonia, municipio, estado, codigoPostal, descripcion, telefonoContacto, emailContacto, sitioWeb, tipoNegocio, tipoCocina, tipoProductos, categoriaHotel, horarios, horarioCheckInOut);
-		}
+	}//PUT controller
 	
 	@DeleteMapping(path="{listingId}")
 	public void deleteListing(@PathVariable("listingId") Long id) {
 		ls.deleteListing(id);
-	}
-}
+	}//DELETE controller
+}//CLASS

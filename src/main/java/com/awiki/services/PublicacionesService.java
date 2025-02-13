@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.awiki.models.Publicacion;
-import com.awiki.repository.PublicacionesRepository;
+import com.awiki.repositories.PublicacionesRepository;
 @Service
 public class PublicacionesService {
 
