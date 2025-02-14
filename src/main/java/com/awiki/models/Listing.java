@@ -53,6 +53,7 @@ public class Listing {
 	private List<Resena> resenasListing = new ArrayList<Resena>();
 	
 	public Listing() {
+		this.rating = 5.0;
 	}
 
 	public Listing(String nombre, String imagen, String nombreCalle, String numeroCalle, String colonia, String municipio,

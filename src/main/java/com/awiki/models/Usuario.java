@@ -22,9 +22,10 @@ public class Usuario {
 	private String email;
 	@Column(nullable = false)
 	private String contrasena;
+	
 	private String imagenPerfil;
-	@Column(nullable = false)
 	private String descripcionPerfil;
+	
 	@Column(nullable = false)
 	private Boolean esPerfilEmpresa;
 
